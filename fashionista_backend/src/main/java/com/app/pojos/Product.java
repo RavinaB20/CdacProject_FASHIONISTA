@@ -31,9 +31,9 @@ public class Product extends BaseEntity {
 	
 	// many to one Product *-----> 1Category
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id", nullable = false)
-	private Category productCategory;
-	
+	@JoinColumn(name = "sub_category_id", nullable = false)
+	private SubCategory productSubCategory;
+		
 	//Product 1----->1 CartItem
 
 	public Product() {
@@ -80,12 +80,12 @@ public class Product extends BaseEntity {
 		this.inStock = inStock;
 	}
 
-	public Category getProductCategory() {
-		return productCategory;
+	public SubCategory getProductSubCategory() {
+		return productSubCategory;
 	}
 
-	public void setProductCategory(Category productCategory) {
-		this.productCategory = productCategory;
+	public void setProductSubCategory(SubCategory productCategory) {
+		this.productSubCategory = productCategory;
 	}
 	
 	@Override
