@@ -26,6 +26,9 @@ public class User extends BaseEntity {
 	@Column(name = "user_role", length = 20)
 	private Role userRole;
 	
+	@Column(name="mobile_no", unique = true, nullable = false)
+	private Long mobileNo;
+	
 	private LocalDate dob;
 	
 	// User 1--->1 Cart
@@ -46,14 +49,16 @@ public class User extends BaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String firstName, String lastName, String email, String password, Role userRole, LocalDate dob) {
+	public User(String firstName, String lastName, String email, String password, LocalDate dob, Long mobileNo) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.userRole = userRole;
+		this.userRole = Role.CUSTOMER;
 		this.dob = dob;
+		this.mobileNo = mobileNo;
+		
 	}
 
 	public String getFirstName() {
@@ -104,6 +109,13 @@ public class User extends BaseEntity {
 		this.dob = dob;
 	}
 	
+	public Long getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(Long mobileNo) {
+		this.mobileNo = mobileNo;
+	}
 
 	public ShoppingCart getCart() {
 		return cart;

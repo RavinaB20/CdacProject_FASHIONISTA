@@ -25,7 +25,8 @@ public class Address {
 	@Column(name="full_name", length=50)
 	private String fullName;
 	
-	private int pincode;
+	
+	private Integer pincode;
 	
 	@Column(length = 20)
 	private String state;
@@ -41,11 +42,11 @@ public class Address {
 	private String area;
 
 	@Column(name = "created_on")
-	@CreationTimestamp
+	//@CreationTimestamp
 	private LocalDateTime createdOn;
 	
 	@Column(name = "updated_on")
-	@UpdateTimestamp
+	//@UpdateTimestamp
 	private LocalDateTime updatedOn;
 	
 }

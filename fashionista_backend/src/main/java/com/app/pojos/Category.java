@@ -21,8 +21,7 @@ public class Category extends BaseEntity {
 	
 	// one to many : bi dir Category 1--->* Product
 	//Category -- one , parent ,non-owning, inverse(since no FK mapping)
-	@OneToMany(mappedBy = "productCategory",
-			cascade = CascadeType.ALL, orphanRemoval = true/* ,fetch = FetchType.EAGER */)
+	@OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL, orphanRemoval = true/* ,fetch = FetchType.EAGER */)
 	private List<Product> products = new ArrayList<>();// init to empty list //as per Gavin King's suggestion : DO NOT keep collection based null
 
 	public Category() {
