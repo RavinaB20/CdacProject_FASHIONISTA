@@ -27,7 +27,14 @@ public class Product extends BaseEntity {
 	@Column(name = "in_stock")
 	private boolean inStock;
 	
+	private int quantity;
+	
 	private Color color;
+	
+	private int size;
+	
+	@Column(nullable = true, length = 500)
+	private String productImagePath;
 	
 	// many to one Product *-----> 1Category
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -88,6 +95,38 @@ public class Product extends BaseEntity {
 		this.productSubCategory = productCategory;
 	}
 	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public String getProductImagePath() {
+		return productImagePath;
+	}
+
+	public void setProductImagePath(String productImagePath) {
+		this.productImagePath = productImagePath;
+	}
+
 	@Override
 	public String toString() {
 		return "Product ID " + getId() + " [productName=" + productName + ", price=" + price + ", description="

@@ -21,8 +21,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
-@Getter
-@Setter
 public class Order extends BaseEntity {
 	@CreationTimestamp
 	private LocalDate orderDate;
@@ -39,6 +37,62 @@ public class Order extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private User customer;
+	
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public LocalDate getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(LocalDate deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public double getShippingFee() {
+		return shippingFee;
+	}
+
+	public void setShippingFee(double shippingFee) {
+		this.shippingFee = shippingFee;
+	}
+
+	public Status getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(Status orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public User getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(User customer) {
+		this.customer = customer;
+	}
+
+	public List<OrderDetail> getOrderDetailList() {
+		return orderDetailList;
+	}
+
+	public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+		this.orderDetailList = orderDetailList;
+	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order",orphanRemoval = true)
 	private List<OrderDetail> orderDetailList=new ArrayList<>();

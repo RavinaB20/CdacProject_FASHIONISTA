@@ -1,12 +1,15 @@
 package com.app.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.app.dto.ApiResponse;
 import com.app.exception.ResourceNotFoundException;
 import com.app.pojos.User;
 import com.app.repository.UserRepository;
@@ -52,6 +55,7 @@ public class UserServiceImpl implements UserService{
 		}
 		throw new ResourceNotFoundException("User record not exists...");
 	}
+
 	
 	
 }

@@ -13,10 +13,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "order_detail")
-@Getter
-@Setter
-@NoArgsConstructor
-
 public class OrderDetail extends BaseEntity {
 	private int quantity;
 
@@ -36,6 +32,39 @@ public class OrderDetail extends BaseEntity {
 		this.totalPrice = totalPrice;
 		this.product = product;
 	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 	
 
 }
