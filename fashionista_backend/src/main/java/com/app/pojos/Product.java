@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 /*
  * Product Entity : id, name,price,desc,inStock +
@@ -17,7 +18,9 @@ private Category productCategory;
 @Entity
 @Table(name = "products")
 public class Product extends BaseEntity {
+	
 	@Column(name = "product_name", length = 30, unique = true)
+	@NotBlank(message = "Product name is required.")
 	private String productName;
 	
 	private double price;
@@ -47,7 +50,7 @@ public class Product extends BaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String productName, double price, String description) {
+ 	public Product(String productName, double price, String description) {
 		super();
 		this.productName = productName;
 		this.price = price;

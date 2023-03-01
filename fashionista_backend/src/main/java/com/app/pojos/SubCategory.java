@@ -90,14 +90,14 @@ public class SubCategory extends BaseEntity {
 		p.setProductSubCategory(this);
 	}
 	//add a method(convenience/helper) to remove a bi dir asso. between entities
-		public void removeProduct(Product p)
-		{
-			//parent ----X---> child
-			products.remove(p);
-			//child ----X----> parent
-			p.setProductSubCategory(null);
-			
-			
-		}
+	public void removeProduct(Product p)
+	{
+		//parent ----X---> child
+		products.remove(p);
+		//child ----X----> parent
+		p.setProductSubCategory(null);
+		
+		
+	}
 
 }

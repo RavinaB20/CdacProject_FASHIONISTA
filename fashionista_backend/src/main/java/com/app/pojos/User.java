@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;//JPA : Java EE specs
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 //user : one , parent , inverse : since DOES NOT FK
 
 @Entity
@@ -20,6 +23,7 @@ public class User extends BaseEntity {
 	private String email;
 	
 	@Column(length = 20, nullable = false) // => NOT NULL
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@Enumerated(EnumType.STRING) // => col : varchar => enum const name
