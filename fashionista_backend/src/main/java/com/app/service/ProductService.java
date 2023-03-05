@@ -1,15 +1,29 @@
 package com.app.service;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.app.dto.ApiResponse;
+import com.app.dto.ProductDTO;
+import com.app.pojos.Color;
 import com.app.pojos.Product;
 
 public interface ProductService {
-	List<Product> getAllProducts();
 	
-	Product addNewProduct(Long subCategoryId, Product product);
+	Product addNewProduct(ProductDTO prodDto, MultipartFile file) throws IOException;
 	
-	String deleteSubCategory(Long categoryId);
+	List<ProductDTO> getAllProducts();	
 	
-	Product updateProductDetails(Product product);
+	String deleteProduct(Long productId);
+	
+	String updateProductDetails(Long productId, ProductDTO productDto);
+	
+	ProductDTO getProductById(Long productId);
+	
+	
+	//price, quantity, size, subCat
+
 }

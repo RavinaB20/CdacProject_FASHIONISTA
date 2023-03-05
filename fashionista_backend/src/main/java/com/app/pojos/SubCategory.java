@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="sub_categories")
 public class SubCategory extends BaseEntity {
@@ -21,16 +23,13 @@ public class SubCategory extends BaseEntity {
 	@Column(length = 300)
 	private String description;
 	
-	// one to many : bi dir Category 1--->* Product
-	//Category -- one , parent ,non-owning, inverse(since no FK mapping)
-	@OneToMany(mappedBy = "productSubCategory", cascade = CascadeType.ALL, orphanRemoval = true/* ,fetch = FetchType.EAGER */)
-	private List<Product> products = new ArrayList<>();// init to empty list //as per Gavin King's suggestion : DO NOT keep collection based null
+	@OneToMany(mappedBy = "productSubCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Product> products = new ArrayList<>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "category_id")
+	@JsonIgnoreProperties("subCategories")
 	private Category productCategory;
-	
-	
 	
 	public SubCategory() {
 		// TODO Auto-generated constructor stub
@@ -38,10 +37,27 @@ public class SubCategory extends BaseEntity {
 
 	public SubCategory(String categoryName, String description) {
 		super();
+		System.out.println("In sub cat ctor...");
 		this.subCategoryName = categoryName;
 		this.description = description;
 	}
 
+	
+
+	public SubCategory(String subCategoryName, String description, Category productCategory) {
+		super();
+		this.subCategoryName = subCategoryName;
+		this.description = description;
+		this.productCategory = productCategory;
+	}
+
+	public SubCategory(String subCategoryName, String description, List<Product> products, Category productCategory) {
+		super();
+		this.subCategoryName = subCategoryName;
+		this.description = description;
+		this.products = products;
+		this.productCategory = productCategory;
+	}
 
 	public String getSubCategoryName() {
 		return subCategoryName;
@@ -56,7 +72,9 @@ public class SubCategory extends BaseEntity {
 	}
 
 	public void setProductCategory(Category productCategory) {
+		System.out.println("In setter set product category" + productCategory);		
 		this.productCategory = productCategory;
+		System.out.println("After setting id : - " +productCategory);
 	}
 
 	public String getDescription() {
@@ -74,13 +92,7 @@ public class SubCategory extends BaseEntity {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	// Founder's suggestion : NEVER add asso properties toString --o.w may cause
-	// recursion!
 
-	@Override
-	public String toString() {
-		return "Category ID " + getId() + " [categoryName=" + subCategoryName + ", description=" + description + "]";
-	}
 	//add a method(convenience/helper) to establish a bi dir asso. between entities
 	public void addProduct(Product p)
 	{
@@ -89,6 +101,12 @@ public class SubCategory extends BaseEntity {
 		//child --> parent
 		p.setProductSubCategory(this);
 	}
+	@Override
+	public String toString() {
+		return "SubCategory "+getId()+" [subCategoryName=" + subCategoryName + ", description=" + description + ", products="
+				+ products +"]";
+	}
+
 	//add a method(convenience/helper) to remove a bi dir asso. between entities
 	public void removeProduct(Product p)
 	{

@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="categories")
 public class Category extends BaseEntity{
@@ -19,10 +22,15 @@ public class Category extends BaseEntity{
 	private List<SubCategory> subCategories = new ArrayList<>();
 
 	public Category() {
-		// TODO Auto-generated constructor stub
 	}
 	
-	public Category(String categoryName, String description, List<SubCategory> categories) {
+	public Category(Long catId) {
+		super();
+		System.out.println("In category 1 arg ctor");
+		this.setId(catId);
+	}
+	
+	public Category(String categoryName, String description) {
 		super();
 		this.categoryName = categoryName;
 		this.description = description;
@@ -44,21 +52,22 @@ public class Category extends BaseEntity{
 		this.description = description;
 	}
 
-	public List<SubCategory> getCategories() {
+	public List<SubCategory> getSubCategories() {
 		return subCategories;
 	}
 
-	public void setCategories(List<SubCategory> subCategories) {
+	public void setSubCategories(List<SubCategory> subCategories) {
 		this.subCategories = subCategories;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Category [categoryName=" + categoryName + ", description=" + description + ", subCategories=" + subCategories
+		return "category id : " +getId()+  "Category [categoryName=" + categoryName + ", description=" + description + ", subCategories=" + subCategories
 				+ "]";
 	}
 	
 	public void addSubCategory(SubCategory cat) {
+		System.out.println("Addsub helper category............");
 		subCategories.add(cat);
 		cat.setProductCategory(this);
 	}

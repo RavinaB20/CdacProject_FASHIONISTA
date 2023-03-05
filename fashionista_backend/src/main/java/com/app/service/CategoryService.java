@@ -2,11 +2,15 @@ package com.app.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
+import com.app.dto.CategoryDTO;
+import com.app.dto.ResponseGetCategoryDTO;
 import com.app.pojos.Category;
 
 public interface CategoryService {
 	
-	List<Category> getAllCategories();
+	List<ResponseGetCategoryDTO> getAllCategories();
 	
 	Category addNewCategory(Category category);
 	

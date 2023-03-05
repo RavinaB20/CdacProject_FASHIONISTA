@@ -44,7 +44,6 @@ public class User extends BaseEntity {
 	private Address userAddress;
 	
 
-	// User 1----->* PaymentCard => uni dir asso between Entity n collection of Composite value type
 	@ElementCollection // Mandatory o.w : HIb throws MappingExc
 	@CollectionTable(name = "payment_cards", joinColumns = @JoinColumn(name = "user_id"))
 	private List<PaymentCard> paymentCards = new ArrayList<>();
