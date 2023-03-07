@@ -142,5 +142,36 @@ public class ProductServiceImpl implements ProductService{
 		
 	}
 
+	@Override
+	public List<ProductDTO> getSortedProducts(String sortBy, String order) {
+		// TODO Auto-generated method stub
+	    Sort sortingOrder = order.equals("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+		List<Product> products = productRepo.findAll(sortingOrder);
+		return products.stream().map(ProductDTO::new).collect(Collectors.toList());
+	}
 
+	public List<ProductDTO> getProductByColor(Color color){
+		return productRepo.findByColor(color).stream().map(ProductDTO::new).collect(Collectors.toList());
+	}
+	
+	public List<ProductDTO> getProductByProductName(String productName){
+		return productRepo.findByProductName(productName).stream().map(ProductDTO::new).collect(Collectors.toList());
+	}
+	
+	public List<ProductDTO> getProductBySubCategory(Long subCatId){
+		
+		SubCategory subCategory = subCatRepo.findById(subCatId).orElseThrow(()->new ResourceNotFoundException("Subcategory is invalid."));
+		return productRepo.findByProductSubCategory(subCategory) .stream().map(ProductDTO::new).collect(Collectors.toList());
+	}
+	
+	public List<ProductDTO> getProductByQuantity(int quantity){
+		return productRepo.findByQuantity(quantity).stream().map(ProductDTO::new).collect(Collectors.toList());
+	}
+	
+	public List<ProductDTO> getProductBySize(int size){
+		return productRepo.findBySize(size).stream().map(ProductDTO::new).collect(Collectors.toList());
+	}
+	
+	
+	
 }

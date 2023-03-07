@@ -28,6 +28,19 @@ public class ProductDTO {
 		System.out.println("In ctor proddto");
 	}
 	
+	public ProductDTO(Product product) {
+		super();
+		System.out.println("Para 11111111111111111111111");
+		this.productId = product.getId();
+		this.productName = product.getProductName();
+		this.price = product.getPrice();
+		this.description = product.getDescription();
+		this.quantity = product.getQuantity();
+		this.color = product.getColor();
+		this.size = product.getSize();
+		this.productImagePath = product.getProductImagePath();
+		this.productSubCategoryId = product.getProductSubCategory().getId();
+	}
 	
 	public ProductDTO(Long productId, String productName, double price, String description, int quantity, Color color,
 			int size, String productImagePath, Long productSubCategoryId) {

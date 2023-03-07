@@ -90,5 +90,52 @@ public class ProductController {
 		return ResponseEntity.ok(prodService.getProductById(productId));
 	}
 	
+	@GetMapping("/sortProducts")
+	public List<ProductDTO> getSortedProducts(@RequestParam String sortBy, @RequestParam String order) {
+	    return prodService.getSortedProducts(sortBy, order);
+	    
+	    //List<Product> products = productRepository.findAll(sortingOrder);
+	    //return products.stream().map(ProductDto::new).collect(Collectors.toList());
+	}
+	
+	@GetMapping("/product/color")
+	public List<ProductDTO> getProductByColor(@RequestParam String color){
+		return prodService.getProductByColor(Color.valueOf(color));
+	}
+	
+	@GetMapping("/product/productName")
+	public List<ProductDTO> getProductByProductName(@RequestParam String productName){
+		return prodService.getProductByProductName(productName);
+	}
+	
+	@GetMapping("/product/quantity")
+	public List<ProductDTO> getProductByQuantity(@RequestParam int quantity){
+		return prodService.getProductByQuantity(quantity);
+	}
+	
+	@GetMapping("/product/size")
+	public List<ProductDTO> getProductBySize(@RequestParam int size){
+		return prodService.getProductBySize(size);
+	}
+	
+	@GetMapping("/product/subCatId")
+	public List<ProductDTO> getProductByCategoryId(@RequestParam Long subCatId){
+		return prodService.getProductBySubCategory(subCatId);
+	}
+	
+	
+	
+	// any authenticated user should be able to browse the categories
+	@GetMapping("/browse_categories")
+	public String browseCategories() {
+		
+		return "any authenticated user should be able to browse the categories";
+	}
 
+	// customer should be able to purchase products
+	@GetMapping("/purchase")
+	public String purchaseProducts() {
+		return "customer should be able to purchase products";
+	}
+	
 }

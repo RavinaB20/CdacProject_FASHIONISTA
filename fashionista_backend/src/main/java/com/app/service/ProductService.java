@@ -23,6 +23,17 @@ public interface ProductService {
 	
 	ProductDTO getProductById(Long productId);
 	
+	List<ProductDTO> getSortedProducts(String sortBy, String order);
+	
+	List<ProductDTO> getProductByColor(Color color);
+
+	List<ProductDTO> getProductByProductName(String productName);
+
+	List<ProductDTO> getProductBySubCategory(Long subCatId);
+
+	List<ProductDTO> getProductByQuantity(int quantity);
+
+	List<ProductDTO> getProductBySize(int size);
 	
 	//price, quantity, size, subCat
 
