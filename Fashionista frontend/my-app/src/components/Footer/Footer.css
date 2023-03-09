@@ -1,0 +1,19 @@
+.footer-container{
+    position: relative;
+    top: 1px;
+}
+
+th,tr{
+    padding-right: 100px ;
+}
+
+th{
+    font-size: x-large;
+    font-style: italic;
+    color: purple
+}
+
+tr{
+    font-size: large;
+    color: palevioletred;
+}
