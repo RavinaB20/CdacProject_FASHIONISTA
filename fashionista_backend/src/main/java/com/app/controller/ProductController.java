@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.ApiResponse;
-import com.app.dto.ProductDTO;
+import com.app.dto.ProductDto;
 import com.app.pojos.Color;
 import com.app.pojos.Product;
 import com.app.service.ProductService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/products")
 @Validated
 public class ProductController {
@@ -41,11 +43,10 @@ public class ProductController {
 	}
 	
 	@GetMapping
-	public List<ProductDTO> getAllProducts() {
+	public List<ProductDto> getAllProducts() {
 		System.out.println("In get all product");
 		return prodService.getAllProducts();
 	}
-	
 	
 	@PostMapping(value="/add", consumes = "multipart/form-data")
 	public ResponseEntity<Product> addNewProduct(@RequestParam("productName") String productName,
@@ -56,15 +57,14 @@ public class ProductController {
 											@RequestParam("size") int size,
 											@RequestParam("productSubCategoryId") Long subCatId,
 											@RequestParam("file") MultipartFile file) throws IOException {
-		ProductDTO prodDto = new ProductDTO();
+		ProductDto prodDto = new ProductDto();
 		prodDto.setColor(color);
 		prodDto.setDescription(description);
 		prodDto.setPrice(price);
 		prodDto.setProductName(productName);
 		prodDto.setProductSubCategoryId(subCatId);
 		prodDto.setQuantity(quantity);
-		prodDto.setSize(size);
-		
+		prodDto.setSize(size);	
 		return new ResponseEntity<Product>(prodService.addNewProduct(prodDto, file), HttpStatus.CREATED);
 	}
 
@@ -78,20 +78,20 @@ public class ProductController {
 	}
 	
 	@PutMapping("/{productId}")
-	public ApiResponse updateProductDetails(@PathVariable Long productId, @RequestBody ProductDTO productDto) {
+	public ApiResponse updateProductDetails(@PathVariable Long productId, @RequestBody ProductDto productDto) {
 		System.out.println("In update product");
 		
 		return new ApiResponse(prodService.updateProductDetails(productId, productDto));
 	}
 	
 	@GetMapping("{productId}")
-	public ResponseEntity<ProductDTO> getProductById(@PathVariable Long productId) {
+	public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId) {
 		System.out.println("In product details");
 		return ResponseEntity.ok(prodService.getProductById(productId));
 	}
 	
 	@GetMapping("/sortProducts")
-	public List<ProductDTO> getSortedProducts(@RequestParam String sortBy, @RequestParam String order) {
+	public List<ProductDto> getSortedProducts(@RequestParam String sortBy, @RequestParam String order) {
 	    return prodService.getSortedProducts(sortBy, order);
 	    
 	    //List<Product> products = productRepository.findAll(sortingOrder);
@@ -99,27 +99,27 @@ public class ProductController {
 	}
 	
 	@GetMapping("/product/color")
-	public List<ProductDTO> getProductByColor(@RequestParam String color){
+	public List<ProductDto> getProductByColor(@RequestParam String color){
 		return prodService.getProductByColor(Color.valueOf(color));
 	}
 	
 	@GetMapping("/product/productName")
-	public List<ProductDTO> getProductByProductName(@RequestParam String productName){
+	public List<ProductDto> getProductByProductName(@RequestParam String productName){
 		return prodService.getProductByProductName(productName);
 	}
 	
 	@GetMapping("/product/quantity")
-	public List<ProductDTO> getProductByQuantity(@RequestParam int quantity){
+	public List<ProductDto> getProductByQuantity(@RequestParam int quantity){
 		return prodService.getProductByQuantity(quantity);
 	}
 	
 	@GetMapping("/product/size")
-	public List<ProductDTO> getProductBySize(@RequestParam int size){
+	public List<ProductDto> getProductBySize(@RequestParam int size){
 		return prodService.getProductBySize(size);
 	}
 	
 	@GetMapping("/product/subCatId")
-	public List<ProductDTO> getProductByCategoryId(@RequestParam Long subCatId){
+	public List<ProductDto> getProductByCategoryId(@RequestParam Long subCatId){
 		return prodService.getProductBySubCategory(subCatId);
 	}
 	

@@ -36,7 +36,7 @@ public class User extends BaseEntity {
 	private LocalDate dob;
 	
 	// User 1--->1 Cart
-	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private ShoppingCart cart;
 
 	// User 1--->1 Address => uni dir asso between Entity n Composite value type
@@ -131,7 +131,7 @@ public class User extends BaseEntity {
 	// Helper method to establish bi dir link between User n Cart
 	public void addCart(ShoppingCart cart) {
 		this.setCart(cart);// parent ---> child
-		cart.setCustomer(this);// child ---> parent
+		cart.setUser(this);// child ---> parent
 	}
 
 

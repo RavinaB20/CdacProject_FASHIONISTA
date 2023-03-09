@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.app.pojos.SubCategory;
 
-public class ResponseGetCategoryDTO {
+public class ResponseGetCategoryDto {
 
 	private Long catId;
 	
@@ -14,11 +14,11 @@ public class ResponseGetCategoryDTO {
 	
 	private String description;
 	
-	public ResponseGetCategoryDTO() {
+	public ResponseGetCategoryDto() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ResponseGetCategoryDTO(String categoryName, String description) {
+	public ResponseGetCategoryDto(String categoryName, String description) {
 		super();
 		this.catId = catId;
 		this.categoryName = categoryName;

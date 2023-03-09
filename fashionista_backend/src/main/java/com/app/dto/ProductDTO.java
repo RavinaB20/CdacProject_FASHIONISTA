@@ -3,7 +3,7 @@ package com.app.dto;
 import com.app.pojos.Color;
 import com.app.pojos.Product;
 
-public class ProductDTO {
+public class ProductDto {
 	
 	private Long productId;
 	
@@ -23,12 +23,12 @@ public class ProductDTO {
 	
 	private Long productSubCategoryId;
 
-	public ProductDTO() {
+	public ProductDto() {
 		// TODO Auto-generated constructor stub
 		System.out.println("In ctor proddto");
 	}
 	
-	public ProductDTO(Product product) {
+	public ProductDto(Product product) {
 		super();
 		System.out.println("Para 11111111111111111111111");
 		this.productId = product.getId();
@@ -42,7 +42,7 @@ public class ProductDTO {
 		this.productSubCategoryId = product.getProductSubCategory().getId();
 	}
 	
-	public ProductDTO(Long productId, String productName, double price, String description, int quantity, Color color,
+	public ProductDto(Long productId, String productName, double price, String description, int quantity, Color color,
 			int size, String productImagePath, Long productSubCategoryId) {
 		super();
 		System.out.println("Para 11111111111111111111111");
@@ -57,7 +57,7 @@ public class ProductDTO {
 		this.productSubCategoryId = productSubCategoryId;
 	}
 
-	public ProductDTO(String productName, double price, String description, int quantity, Color color, int size,
+	public ProductDto(String productName, double price, String description, int quantity, Color color, int size,
 			String productImagePath, Long productSubCategoryId) {
 		super();
 		System.out.println("Para 2222222222222222222222222222222222");
@@ -72,7 +72,7 @@ public class ProductDTO {
 	}
 	
 
-	public ProductDTO(String productName, double price, String description, int quantity, Color color, int size,
+	public ProductDto(String productName, double price, String description, int quantity, Color color, int size,
 			Long productSubCategoryId) {
 		super();
 		System.out.println("This ctor called in product dto : 3333333333333333333 : ");

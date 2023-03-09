@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -24,7 +23,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.ApiResponse;
-import com.app.dto.ProductDTO;
+import com.app.dto.ProductDto;
 import com.app.exception.ResourceNotFoundException;
 import com.app.pojos.Color;
 import com.app.pojos.Product;
@@ -59,21 +58,21 @@ public class ProductServiceImpl implements ProductService{
 			System.out.println("folder alrdy exists....");
 	}
 
-	private ProductDTO mapToDTO(Product product) {
-		ProductDTO productDto = modelMapper.map(product, ProductDTO.class);
+	private ProductDto mapToDTO(Product product) {
+		ProductDto productDto = modelMapper.map(product, ProductDto.class);
 		productDto.setProductSubCategoryId(product.getProductSubCategory().getId());
 		productDto.setProductId(product.getId());
 		return productDto;
 	}
 	
 	@Override
-	public List<ProductDTO> getAllProducts() {
+	public List<ProductDto> getAllProducts() {
 		// TODO Auto-generated method stub
 		return productRepo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
 	@Override
-	public Product addNewProduct(ProductDTO prodDto ,MultipartFile file) throws IOException {
+	public Product addNewProduct(ProductDto prodDto ,MultipartFile file) throws IOException {
 		
 		Product product = new Product();
 		product.setProductName(prodDto.getProductName());
@@ -89,7 +88,7 @@ public class ProductServiceImpl implements ProductService{
 		String targetPath = folderName + File.separator + file.getOriginalFilename();
 		System.out.println(targetPath);
 	  	Files.copy(file.getInputStream(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
-	  	
+	 	
 	  	product.setProductImagePath(targetPath);
 	  	return productRepo.save(product);
 	}
@@ -112,7 +111,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public String updateProductDetails(Long productId, ProductDTO productDto) {
+	public String updateProductDetails(Long productId, ProductDto productDto) {
 		Product prod = productRepo.findById(productId).orElseThrow(()-> new ResourceNotFoundException("Product not found"));
 		if(productDto.getProductSubCategoryId()!=prod.getProductSubCategory().getId())
 		{
@@ -136,40 +135,40 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public ProductDTO getProductById(Long productId) {
+	public ProductDto getProductById(Long productId) {
 		
 		return productRepo.findById(productId).map(this::mapToDTO).orElseThrow(() -> new ResourceNotFoundException("Invalid product Id.."));
 		
 	}
 
 	@Override
-	public List<ProductDTO> getSortedProducts(String sortBy, String order) {
+	public List<ProductDto> getSortedProducts(String sortBy, String order) {
 		// TODO Auto-generated method stub
 	    Sort sortingOrder = order.equals("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
 		List<Product> products = productRepo.findAll(sortingOrder);
-		return products.stream().map(ProductDTO::new).collect(Collectors.toList());
+		return products.stream().map(ProductDto::new).collect(Collectors.toList());
 	}
 
-	public List<ProductDTO> getProductByColor(Color color){
-		return productRepo.findByColor(color).stream().map(ProductDTO::new).collect(Collectors.toList());
+	public List<ProductDto> getProductByColor(Color color){
+		return productRepo.findByColor(color).stream().map(ProductDto::new).collect(Collectors.toList());
 	}
 	
-	public List<ProductDTO> getProductByProductName(String productName){
-		return productRepo.findByProductName(productName).stream().map(ProductDTO::new).collect(Collectors.toList());
+	public List<ProductDto> getProductByProductName(String productName){
+		return productRepo.findByProductName(productName).stream().map(ProductDto::new).collect(Collectors.toList());
 	}
 	
-	public List<ProductDTO> getProductBySubCategory(Long subCatId){
+	public List<ProductDto> getProductBySubCategory(Long subCatId){
 		
 		SubCategory subCategory = subCatRepo.findById(subCatId).orElseThrow(()->new ResourceNotFoundException("Subcategory is invalid."));
-		return productRepo.findByProductSubCategory(subCategory) .stream().map(ProductDTO::new).collect(Collectors.toList());
+		return productRepo.findByProductSubCategory(subCategory) .stream().map(ProductDto::new).collect(Collectors.toList());
 	}
 	
-	public List<ProductDTO> getProductByQuantity(int quantity){
-		return productRepo.findByQuantity(quantity).stream().map(ProductDTO::new).collect(Collectors.toList());
+	public List<ProductDto> getProductByQuantity(int quantity){
+		return productRepo.findByQuantity(quantity).stream().map(ProductDto::new).collect(Collectors.toList());
 	}
 	
-	public List<ProductDTO> getProductBySize(int size){
-		return productRepo.findBySize(size).stream().map(ProductDTO::new).collect(Collectors.toList());
+	public List<ProductDto> getProductBySize(int size){
+		return productRepo.findBySize(size).stream().map(ProductDto::new).collect(Collectors.toList());
 	}
 	
 	

@@ -6,18 +6,22 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.ApiResponse;
+import com.app.dto.UserDto;
+import com.app.dto.UserLoginDto;
+import com.app.dto.UserSpecificResponse;
 import com.app.pojos.User;
 
 public interface UserService {
 
-	List<User> getAllUsersDetails();
+	List<UserDto> getAllUsersDetails();
 	
-	User addNewUser(User user);
+	UserSpecificResponse addNewUser(UserDto user);
 	
 	String deleteUser(Long userId);
 	
-	User getUserDetails(Long userId);
+	UserDto getUserDetails(Long userId);
 	
-	User updateUserDetails(User user);
+	UserDto updateUserDetails(Long userId, UserDto userDto);
 	
+	UserSpecificResponse authenticateUser(UserLoginDto dto);
 }

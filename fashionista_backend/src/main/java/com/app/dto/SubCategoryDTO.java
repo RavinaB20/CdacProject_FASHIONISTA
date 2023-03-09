@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.app.pojos.Product;
 
-public class SubCategoryDTO {
+public class SubCategoryDto {
 
 	private Long subCatId;
 	
@@ -18,12 +18,12 @@ public class SubCategoryDTO {
 	
 	private List<Product> products = new ArrayList<>();
 
-	public SubCategoryDTO() {
+	public SubCategoryDto() {
 		// TODO Auto-generated constructor stub
 		System.out.println("xxxxxxxx111111111111111111111111");
 	}
 
-	public SubCategoryDTO(Long subCatId, String subCategoryName, String description, Long productCategoryId) {
+	public SubCategoryDto(Long subCatId, String subCategoryName, String description, Long productCategoryId) {
 		super();
 		System.out.println("xxxxxxxxxx222222222222222222222222");
 		this.subCatId = subCatId;
@@ -32,7 +32,7 @@ public class SubCategoryDTO {
 		this.productCategoryId = productCategoryId;
 	}
 	
-	public SubCategoryDTO(String subCategoryName, String description, Long productCategoryId, List<Product> products) {
+	public SubCategoryDto(String subCategoryName, String description, Long productCategoryId, List<Product> products) {
 		super();
 		System.out.println("xxxxxxxxxxx3333333333333333333333333333333");
 		this.subCategoryName = subCategoryName;
@@ -41,7 +41,7 @@ public class SubCategoryDTO {
 		this.products = products;
 	}
 
-	public SubCategoryDTO(Long subCatId, String subCategoryName, String description, Long productCategoryId,
+	public SubCategoryDto(Long subCatId, String subCategoryName, String description, Long productCategoryId,
 			List<Product> products) {
 		super();
 		System.out.println("xxxxxxxxx44444444444444444444444444444444");

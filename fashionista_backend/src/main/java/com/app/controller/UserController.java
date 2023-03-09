@@ -2,7 +2,10 @@ package com.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.ApiResponse;
+import com.app.dto.UserDto;
+import com.app.dto.UserLoginDto;
+import com.app.dto.UserSpecificResponse;
 import com.app.pojos.User;
 import com.app.service.UserService;
 
@@ -28,43 +35,41 @@ public class UserController {
 		System.out.println("In def ctor of "+getClass());
 	}
 
-	//Request handling method for rendering login form
-	@GetMapping("/login")
-	public String showLoginForm() {
-		System.out.println("In user show login form");
-		return "";
-	}
-	
 	//URL : http://host:post/users method=get
 	@GetMapping
-	public List<User> getUsers(){
+	public List<UserDto> getUsers(){
 		System.out.println("In user getUsers");
-		return userSer.getAllUsersDetails();
+		return  userSer.getAllUsersDetails();
 	}
 	
 	//URL : http://host:post/users method=post
-	@PostMapping
-	public User addNewUser(@RequestBody User newUser) {
-		System.out.println("In add new user"+userSer.addNewUser(newUser));
+	@PostMapping("/register")
+	public UserSpecificResponse addNewUser(@RequestBody UserDto newUser) {
+		System.out.println("In add new user");
 		return userSer.addNewUser(newUser);
 	}
 	
 	@DeleteMapping("/{userId}")
-	public String deleteUser(@PathVariable Long userId) {
+	public ApiResponse deleteUser(@PathVariable Long userId) {
 		System.out.println("In delete user");	
-		return userSer.deleteUser(userId);
+		return new ApiResponse(userSer.deleteUser(userId));
 	}
 	
-	@GetMapping("/{empId}")
-	public User getUserDetails(@PathVariable Long userId) {
+	@GetMapping("/{userId}")
+	public UserDto getUserDetails(@PathVariable Long userId) {
 		return userSer.getUserDetails(userId);
 	}
 	
-	@PutMapping
-	public User updateUserDetails(@RequestBody User user) {
+	@PutMapping("/{userId}")
+	public UserDto updateUserDetails(@PathVariable Long userId, @RequestBody UserDto userDto) {
 		System.out.println("In update user");
-		user.setId(user.getId());
-		return userSer.updateUserDetails(user);
+		//user.setId(user.getId());
+		return userSer.updateUserDetails(userId, userDto);
 	}
 	
+	@PostMapping("/login")
+	public ResponseEntity<?> validateUser(@RequestBody @Valid UserLoginDto dto){
+		return ResponseEntity.ok(userSer.authenticateUser(dto));
+	}
+			
 }

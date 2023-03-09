@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dto.ApiResponse;
-import com.app.dto.SubCategoryDTO;
+import com.app.dto.SubCategoryDto;
 import com.app.exception.ResourceNotFoundException;
 import com.app.pojos.Category;
 import com.app.pojos.SubCategory;
@@ -40,7 +40,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 	}
 	
 	@Override
-	public List<SubCategoryDTO> getAllSubCategories() {
+	public List<SubCategoryDto> getAllSubCategories() {
 		// TODO Auto-generated method stub
 		//return subCatRepo.findAll();
 		List<SubCategory> subCategories = subCatRepo.findAll();
@@ -51,15 +51,15 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 		return subCategories.stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
-	private SubCategoryDTO mapToDTO(SubCategory subCategory) {
-		SubCategoryDTO subCategoryDTO = modelMapper.map(subCategory, SubCategoryDTO.class);
+	private SubCategoryDto mapToDTO(SubCategory subCategory) {
+		SubCategoryDto subCategoryDTO = modelMapper.map(subCategory, SubCategoryDto.class);
 		subCategoryDTO.setProductCategoryId(subCategory.getProductCategory().getId());
 		subCategoryDTO.setSubCatId(subCategory.getId());
 		return subCategoryDTO;
 	}
 	
 	@Override
-	public SubCategory addNewSubCategory(SubCategoryDTO subCategoryDto) {
+	public SubCategory addNewSubCategory(SubCategoryDto subCategoryDto) {
 		// TODO Auto-generated method stub
 		Category category = catRepo.findById(subCategoryDto.getProductCategoryId()).orElseThrow(()-> new EntityNotFoundException("Category Not found" ));		
 		SubCategory subCategory = new SubCategory(subCategoryDto.getSubCategoryName(), subCategoryDto.getDescription(), category);
@@ -95,7 +95,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 	}
 
 	@Override
-	public SubCategoryDTO getSubCategoryById(Long id) {
+	public SubCategoryDto getSubCategoryById(Long id) {
 		System.out.println("here id : "+id);
         SubCategory subCategory = subCatRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Subcategory not found"));
 		System.out.println("Print subcat : "+subCategory);
@@ -108,7 +108,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 		 */	}
 	
 	@Override
-	public void updateSubCategoryDetails(Long id, SubCategoryDTO subCategoryDto) {
+	public void updateSubCategoryDetails(Long id, SubCategoryDto subCategoryDto) {
 		// TODO Auto-generated method stub
 		SubCategory subCategory = subCatRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Subcategory not found"));
 		if(subCategoryDto.getDescription() != null)

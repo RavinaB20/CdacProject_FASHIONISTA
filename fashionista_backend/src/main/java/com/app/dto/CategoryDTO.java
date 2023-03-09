@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.app.pojos.SubCategory;
 
-public class CategoryDTO {
+public class CategoryDto {
 
 	private Long catId;
 	
@@ -14,13 +14,13 @@ public class CategoryDTO {
 	
 	private String description;
 	
-	private List<SubCategoryDTO> subCategories = new ArrayList<>();
+	private List<SubCategoryDto> subCategories = new ArrayList<>();
 
-	public CategoryDTO() {
+	public CategoryDto() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CategoryDTO(String categoryName, String description, List<SubCategoryDTO> subCategories) {
+	public CategoryDto(String categoryName, String description, List<SubCategoryDto> subCategories) {
 		super();
 		this.catId = catId;
 		this.categoryName = categoryName;
@@ -28,7 +28,7 @@ public class CategoryDTO {
 		this.subCategories = subCategories;
 	}
 
-	public CategoryDTO(Long catId, String categoryName, String description, List<SubCategoryDTO> subCategories) {
+	public CategoryDto(Long catId, String categoryName, String description, List<SubCategoryDto> subCategories) {
 		super();
 		this.catId = catId;
 		this.categoryName = categoryName;
@@ -60,11 +60,11 @@ public class CategoryDTO {
 		this.description = description;
 	}
 
-	public List<SubCategoryDTO> getSubCategories() {
+	public List<SubCategoryDto> getSubCategories() {
 		return subCategories;
 	}
 
-	public void setSubCategories(List<SubCategoryDTO> subCategories) {
+	public void setSubCategories(List<SubCategoryDto> subCategories) {
 		this.subCategories = subCategories;
 	}
 

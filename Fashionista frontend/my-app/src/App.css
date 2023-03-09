@@ -28,6 +28,10 @@
   color: #61dafb;
 }
 
+.carousel-container {
+  height: 500px; /* set the height to 500 pixels */
+  }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

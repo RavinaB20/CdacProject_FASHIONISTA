@@ -11,11 +11,6 @@ public class CartItem extends BaseEntity {
 	@Column(name="total_price")
 	private double totalPrice;
 	
-/*No need of this as other class order details is there.	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_id")
-	private Order order;
-*/	
 	//CartItem *---->1 Cart
 	@ManyToOne
 	@JoinColumn(name="cart_id")
@@ -26,9 +21,20 @@ public class CartItem extends BaseEntity {
 	@JoinColumn(name="product_id")
 	private Product cartProduct;
 
+	/*No need of this as other class order details is there.	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id")
+	private Order order;
+*/	
 	public CartItem() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public CartItem(Product product, int quantity) {
+		this.cartProduct = product;
+		this.quantity = quantity;
+	}
+	
 	public CartItem(int quantity, double totalPrice) {
 		super();
 		this.quantity = quantity;

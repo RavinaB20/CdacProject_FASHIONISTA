@@ -7,33 +7,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.ApiResponse;
-import com.app.dto.ProductDTO;
+import com.app.dto.ProductDto;
 import com.app.pojos.Color;
 import com.app.pojos.Product;
 
 public interface ProductService {
 	
-	Product addNewProduct(ProductDTO prodDto, MultipartFile file) throws IOException;
+	Product addNewProduct(ProductDto prodDto, MultipartFile file) throws IOException;
 	
-	List<ProductDTO> getAllProducts();	
+	List<ProductDto> getAllProducts();	
 	
 	String deleteProduct(Long productId);
 	
-	String updateProductDetails(Long productId, ProductDTO productDto);
+	String updateProductDetails(Long productId, ProductDto productDto);
 	
-	ProductDTO getProductById(Long productId);
+	ProductDto getProductById(Long productId);
 	
-	List<ProductDTO> getSortedProducts(String sortBy, String order);
+	List<ProductDto> getSortedProducts(String sortBy, String order);
 	
-	List<ProductDTO> getProductByColor(Color color);
+	List<ProductDto> getProductByColor(Color color);
 
-	List<ProductDTO> getProductByProductName(String productName);
+	List<ProductDto> getProductByProductName(String productName);
 
-	List<ProductDTO> getProductBySubCategory(Long subCatId);
+	List<ProductDto> getProductBySubCategory(Long subCatId);
 
-	List<ProductDTO> getProductByQuantity(int quantity);
+	List<ProductDto> getProductByQuantity(int quantity);
 
-	List<ProductDTO> getProductBySize(int size);
+	List<ProductDto> getProductBySize(int size);
 	
 	//price, quantity, size, subCat
 

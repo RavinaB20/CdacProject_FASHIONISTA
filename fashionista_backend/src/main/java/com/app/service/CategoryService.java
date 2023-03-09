@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.app.dto.CategoryDTO;
-import com.app.dto.ResponseGetCategoryDTO;
+import com.app.dto.CategoryDto;
+import com.app.dto.ResponseGetCategoryDto;
 import com.app.pojos.Category;
 
 public interface CategoryService {
 	
-	List<ResponseGetCategoryDTO> getAllCategories();
+	List<ResponseGetCategoryDto> getAllCategories();
 	
 	Category addNewCategory(Category category);
 	
